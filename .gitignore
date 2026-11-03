@@ -10,3 +10,5 @@ data/raw/*
 !data/raw/*.dvc
 dvc-remote/
 '@ | Set-Content -Encoding utf8 .gitignore
+artifacts/*
+!artifacts/.gitkeep
