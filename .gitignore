@@ -7,5 +7,6 @@ artifacts/*
 !artifacts/.gitkeep
 data/raw/*
 !data/raw/.gitkeep
+!data/raw/*.dvc
 dvc-remote/
 '@ | Set-Content -Encoding utf8 .gitignore
