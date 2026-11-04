@@ -1,0 +1,46 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODEL_VERSION: "1.0.0"
+        GIT_SHA: "local"
+
+    image: breast-cancer-triage:1.0.0
+
+    container_name: breast-cancer-api
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      MODEL_VERSION: "1.0.0"
+      MODEL_PATH: "artifacts/model.joblib"
+      MODEL_CARD_PATH: "artifacts/model_card.json"
+      DECISION_THRESHOLD: "0.5"
+      LOG_LEVEL: "INFO"
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379"
+
+    depends_on:
+      redis:
+        condition: service_healthy
+
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+
+    container_name: breast-cancer-redis
+
+    ports:
+      - "6379:6379"
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+    restart: unless-stopped

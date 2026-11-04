@@ -1,0 +1,26 @@
+
+# Git and Python environments
+.git
+.venv
+**/__pycache__
+**/*.pyc
+.pytest_cache
+
+# Secrets and local configuration
+.env
+
+# DVC internals and local remote storage
+.dvc
+dvc-remote
+**/.dvc
+
+# Exclude DVC pointer files, but KEEP the restored CSV
+data/raw/*.dvc
+data/raw/*.tmp
+
+# Exclude locally generated model artifacts
+artifacts/**
+
+# Other unnecessary files
+*.log
+.ipynb_checkpoints
